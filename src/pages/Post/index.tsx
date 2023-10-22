@@ -4,7 +4,7 @@ import { UserProps } from '../../components/ProfileBar'
 
 import { PostContent } from '../../components/PostContent'
 import { PostHeader } from '../../components/PostHeader'
-import { api } from '../../lib/axios'
+import { api } from '../../api/axios'
 import { useParams } from 'react-router-dom'
 
 export interface IssueProps {

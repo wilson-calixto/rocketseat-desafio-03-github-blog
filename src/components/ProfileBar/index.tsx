@@ -8,7 +8,8 @@ import {
 
 import * as S from './styles'
 import { useCallback, useEffect, useState } from 'react'
-import { api } from '../../lib/axios'
+import { api } from '../../api/axios'
+import { useUser } from '../../hooks/useUser'
 
 export interface UserProps {
   avatarUrl: string
@@ -22,48 +23,52 @@ export interface UserProps {
 }
 
 export function ProfileBar() {
-  const [userData, setUserData] = useState<UserProps | null>(null)
-
-  const getUserData = useCallback(async () => {
-    // TODO get information using usemutation
-  }, [])
-
-  useEffect(() => {
-    getUserData()
-  }, [getUserData])
+  const { data, isLoading, error } = useUser('wilson-calixto')
+  console.log('data', data)
 
   return (
     <S.Container>
       {/* TODO add alt */}
-
-      <S.Avatar>
-        <img src={userData?.avatarUrl || ''} alt="" width="148" height="148" />
-      </S.Avatar>
-      <S.Data>
-        {/* TODO change this for link */}
-        <S.DataHeader>
-          <h1>{userData?.name || 'Loading...'}</h1>
-          <strong>
-            <a href={userData?.htmlUrl || '#'}>
-              Github <ArrowUpRightFromSquare size={18} />
-            </a>
-          </strong>
-        </S.DataHeader>
-        <S.DataMain>
-          <p>{userData?.bio || 'Loading...'}</p>
-        </S.DataMain>
-        <S.DataFooter>
-          <span>
-            <Github size={18} /> {userData?.login || 'Loading...'}
-          </span>
-          <span>
-            <Building size={18} /> {userData?.company || 'Loading...'}
-          </span>
-          <span>
-            <UserGroup size={18} /> {userData?.followers || 0} seguidores
-          </span>
-        </S.DataFooter>
-      </S.Data>
+      {/* {error && <p>Error fetching data</p>} */}
+      {isLoading ? (
+        <p>Fetching data...</p>
+      ) : (
+        <>
+          <S.Avatar>
+            <img
+              src={data?.avatar_url}
+              alt="Imagem do usuário de github selecionado"
+              width="148"
+              height="148"
+            />
+          </S.Avatar>
+          <S.Data>
+            {/* TODO change this for link */}
+            <S.DataHeader>
+              <h1>{data?.name}</h1>
+              <strong>
+                <a href={data?.html_url}>
+                  Github <ArrowUpRightFromSquare size={18} />
+                </a>
+              </strong>
+            </S.DataHeader>
+            <S.DataMain>
+              <p>{data?.bio}</p>
+            </S.DataMain>
+            <S.DataFooter>
+              <span>
+                <Github size={18} /> {data?.login}
+              </span>
+              <span>
+                <Building size={18} /> {data?.company}
+              </span>
+              <span>
+                <UserGroup size={18} /> {data?.followers} seguidores
+              </span>
+            </S.DataFooter>
+          </S.Data>
+        </>
+      )}
     </S.Container>
   )
 }

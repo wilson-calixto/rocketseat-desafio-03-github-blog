@@ -5,7 +5,9 @@ import { Card } from '../Card'
 
 import * as S from './style'
 import { UserProps } from '../ProfileBar'
-import { api } from '../../lib/axios'
+import { api } from '../../api/axios'
+import { useQuery } from 'react-query'
+import { usePost } from '../../hooks/usePost'
 
 interface IssueProps {
   number: number
@@ -18,30 +20,15 @@ interface IssueProps {
 }
 
 export function CardList() {
-  const [issuesList, setIssuesList] = useState<IssueProps[] | undefined>(
-    undefined,
-  )
-
-  const getIssuesList = useCallback(async () => {
-    try {
-      // TODO get information using usemutation
-      console.log('dasdfas')
-    } catch (error) {
-      // TODO make this catch better adding toast
-      console.error('Error:', error)
-    }
-  }, [])
-
-  useEffect(() => {
-    getIssuesList()
-  }, [getIssuesList])
-
-  console.log({ issuesList })
+  const { data, isLoading, error } = usePost()
+  // console.log('data', data)
 
   return (
     <S.Container>
-      {issuesList !== undefined ? (
-        issuesList.map((issue) => (
+      {/* {error && <p>Error fetching data</p>} */}
+      {isLoading && <p>Fetching data...</p>}
+      {data ? (
+        data.map((issue) => (
           <Card
             key={issue.number}
             number={issue.number}
@@ -52,7 +39,8 @@ export function CardList() {
         ))
       ) : (
         // TODO add um value for this situation
-        <span>não tem Post</span>
+        // TODO Refactor the css(make app more resposive) and make integartion ussing hooks and add loading status
+        <span>Nenhum post encontrado</span>
       )}
     </S.Container>
   )
