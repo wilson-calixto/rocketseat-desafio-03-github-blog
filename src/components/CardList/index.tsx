@@ -13,18 +13,19 @@ interface IssueProps {
 }
 
 interface CardListProps {
-  data: any
+  posts: any
   isLoading: boolean
   error: boolean
 }
 
-export function CardList({ data, isLoading, error }: CardListProps) {
+export function CardList({ posts, isLoading, error }: CardListProps) {
+  if (error) return <p>Error fetching data</p>
+
   return (
     <S.Container>
-      {error && <p>Error fetching data</p>}
       {isLoading && <p>Fetching data...</p>}
-      {data?.items?.length > 0 ? (
-        data?.items.map((issue: IssueProps) => (
+      {posts?.length > 0 ? (
+        posts.map((issue: IssueProps) => (
           <Card
             key={issue.number}
             number={issue.number}
@@ -37,8 +38,6 @@ export function CardList({ data, isLoading, error }: CardListProps) {
           />
         ))
       ) : (
-        // TODO add um value for this situation
-        // TODO Refactor the css(make app more resposive)
         <span>Nenhum post encontrado</span>
       )}
     </S.Container>

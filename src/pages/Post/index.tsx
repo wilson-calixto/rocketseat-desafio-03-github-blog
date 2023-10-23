@@ -9,6 +9,7 @@ export interface IssueProps {
   comments: number
   user: UserProps
   url: string
+  title?: string
 }
 
 export function Post() {

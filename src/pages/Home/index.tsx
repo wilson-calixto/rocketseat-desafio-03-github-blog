@@ -4,12 +4,16 @@ import { SearchBar } from '../../components/SearchBar'
 import { usePost } from '../../hooks/usePost'
 
 export function PageHome() {
-  const { data, isLoading, error } = usePost()
+  const { data, filtredPosts, isLoading, error, searchPosts } = usePost()
   return (
     <>
       <ProfileBar />
-      <SearchBar totalCount={data?.total_count | 0} />
-      <CardList data={data} isLoading={isLoading} error={error} />
+      <SearchBar totalCount={data?.total_count | 0} searchPosts={searchPosts} />
+      <CardList
+        posts={filtredPosts || data?.items}
+        isLoading={isLoading}
+        error={error}
+      />
     </>
   )
 }
