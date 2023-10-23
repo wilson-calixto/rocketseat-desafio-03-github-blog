@@ -59,9 +59,11 @@ export function ProfileBar() {
               <span>
                 <Github size={18} /> {data?.login}
               </span>
-              <span>
-                <Building size={18} /> {data?.company}
-              </span>
+              {data?.company && (
+                <span>
+                  <Building size={18} /> {data?.company}
+                </span>
+              )}
               <span>
                 <UserGroup size={18} /> {data?.followers} seguidores
               </span>

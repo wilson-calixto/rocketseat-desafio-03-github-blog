@@ -12,13 +12,34 @@ interface PostProps {
   title: string
   body: string
   created_at: string
+  comments: string
+  html_url: string
+  user: string
 }
 
-export function Card({ number, title, body, created_at }: PostProps) {
+export function Card({
+  number,
+  title,
+  body,
+  created_at,
+  comments,
+  html_url,
+  user,
+}: PostProps) {
   const navigate = useNavigate()
 
   function handleClickGoToPost() {
-    navigate(`/${number}`)
+    navigate(`/${number}`, {
+      state: {
+        number,
+        title,
+        body,
+        created_at,
+        comments,
+        html_url,
+        user,
+      },
+    })
   }
 
   return (

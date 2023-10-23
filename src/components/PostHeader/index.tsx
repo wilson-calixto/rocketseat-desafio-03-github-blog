@@ -10,6 +10,7 @@ import {
 import * as S from './styles'
 import { IssueProps } from '../../pages/Post'
 import { formatRelativeDate } from '../../utils/formatter'
+import { Link } from 'react-router-dom'
 
 export function PostHeader({
   title,
@@ -22,10 +23,10 @@ export function PostHeader({
     <S.Container>
       <S.Header>
         <strong>
-          <a href="/">
+          <Link to="/">
             <ChevronLeft size={12} />
             Voltar
-          </a>
+          </Link>
         </strong>
         <strong>
           <a href={url}>
