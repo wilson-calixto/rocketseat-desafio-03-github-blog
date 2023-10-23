@@ -1,8 +1,5 @@
 /* eslint-disable camelcase */
-import { useCallback, useEffect, useState } from 'react'
-
 import { Card } from '../Card'
-
 import * as S from './style'
 
 interface IssueProps {
@@ -22,10 +19,9 @@ interface CardListProps {
 }
 
 export function CardList({ data, isLoading, error }: CardListProps) {
-  console.log('11111111111', data?.items)
   return (
     <S.Container>
-      {/* {error && <p>Error fetching data</p>} */}
+      {error && <p>Error fetching data</p>}
       {isLoading && <p>Fetching data...</p>}
       {data?.items?.length > 0 ? (
         data?.items.map((issue: IssueProps) => (
@@ -42,7 +38,7 @@ export function CardList({ data, isLoading, error }: CardListProps) {
         ))
       ) : (
         // TODO add um value for this situation
-        // TODO Refactor the css(make app more resposive) and make integartion ussing hooks and add loading status
+        // TODO Refactor the css(make app more resposive)
         <span>Nenhum post encontrado</span>
       )}
     </S.Container>

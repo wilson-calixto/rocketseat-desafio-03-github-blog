@@ -1,25 +1,19 @@
 /* eslint-disable camelcase */
-import { useCallback, useEffect, useState } from 'react'
 import { UserProps } from '../../components/ProfileBar'
-
 import { PostContent } from '../../components/PostContent'
 import { PostHeader } from '../../components/PostHeader'
-import { api } from '../../api/axios'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 export interface IssueProps {
-  title?: string | undefined
-  body?: string | undefined
-  created_at?: string | undefined
-  comments?: number | undefined
-  user?: UserProps | undefined
-  url?: string | undefined
+  created_at: string
+  comments: number
+  user: UserProps
+  url: string
 }
 
 export function Post() {
   const location = useLocation()
   const issueDetails = location.state
-  console.log('issueDetails', issueDetails)
 
   return (
     <>

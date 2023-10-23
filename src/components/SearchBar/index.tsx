@@ -3,7 +3,6 @@ import * as S from './styles'
 export function SearchBar({ totalCount }: { totalCount: number }) {
   return (
     <S.Container>
-      {/* TODO adding variables here */}
       <S.Header>
         <h2>Publicações</h2>
         <span>{totalCount} publicações</span>

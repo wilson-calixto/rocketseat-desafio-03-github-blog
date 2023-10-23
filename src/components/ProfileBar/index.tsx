@@ -7,9 +7,8 @@ import {
 } from 'styled-icons/fa-solid'
 
 import * as S from './styles'
-import { useCallback, useEffect, useState } from 'react'
-import { api } from '../../api/axios'
 import { useUser } from '../../hooks/useUser'
+import { Link } from 'react-router-dom'
 
 export interface UserProps {
   avatarUrl: string
@@ -24,12 +23,9 @@ export interface UserProps {
 
 export function ProfileBar() {
   const { data, isLoading, error } = useUser('wilson-calixto')
-  console.log('data', data)
-
   return (
     <S.Container>
-      {/* TODO add alt */}
-      {/* {error && <p>Error fetching data</p>} */}
+      {error && <p>Error fetching data</p>}
       {isLoading ? (
         <p>Fetching data...</p>
       ) : (
@@ -43,13 +39,12 @@ export function ProfileBar() {
             />
           </S.Avatar>
           <S.Data>
-            {/* TODO change this for link */}
             <S.DataHeader>
               <h1>{data?.name}</h1>
               <strong>
-                <a href={data?.html_url}>
+                <Link to={data?.html_url}>
                   Github <ArrowUpRightFromSquare size={18} />
-                </a>
+                </Link>
               </strong>
             </S.DataHeader>
             <S.DataMain>

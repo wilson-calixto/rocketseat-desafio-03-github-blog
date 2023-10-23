@@ -5,7 +5,6 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 import * as S from './styles'
-import { IssueProps } from '../../pages/Post'
 
 interface CodeProps {
   node: ReactNode
@@ -13,8 +12,7 @@ interface CodeProps {
   className: string
   children: ReactNode
 }
-
-export function PostContent({ body }: IssueProps) {
+export function PostContent({ body }: { body: string }) {
   const Code = ({ node, inline, className, children, ...props }: CodeProps) => {
     const match = /language-(\w+)/.exec(className || '')
     return !inline && match ? (

@@ -29,9 +29,9 @@ export function PostHeader({
           </Link>
         </strong>
         <strong>
-          <a href={url}>
+          <Link to={url}>
             Ver no Github <ArrowUpRightFromSquare size={12} />
-          </a>
+          </Link>
         </strong>
       </S.Header>
       <S.Main>

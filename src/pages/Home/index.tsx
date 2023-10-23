@@ -5,7 +5,6 @@ import { usePost } from '../../hooks/usePost'
 
 export function PageHome() {
   const { data, isLoading, error } = usePost()
-  // console.log('stat', data)
   return (
     <>
       <ProfileBar />
